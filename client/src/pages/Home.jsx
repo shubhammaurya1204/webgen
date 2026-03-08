@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import LoginModal from "../components/loginModal";
+import LoginModal from "../components/LoginModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Coins,
