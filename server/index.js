@@ -15,7 +15,8 @@ const app = express(); // app -> Instence
 app.post("/api/razorpay/webhook",express.raw({type:"application/json"}),razorpayWebhook)
 app.use(cors({
     origin: "https://webgen-frontend-ashy.vercel.app",
-    credentials:true
+    credentials:true,
+    optionsSuccessStatus: 200
 }))
 app.use(express.json()); // convert client data in json
 app.use(cookieParser()); // helps to parse cookie
