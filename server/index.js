@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 const app = express(); // app -> Instence
 app.post("/api/razorpay/webhook",express.raw({type:"application/json"}),razorpayWebhook)
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: "https://webgen-frontend-ashy.vercel.app/",
     credentials:true
 }))
 app.use(express.json()); // convert client data in json
