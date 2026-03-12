@@ -234,9 +234,9 @@ export const generateWebsite = async (req, res) => {
 export const getWebsiteById = async(req,res)=>{
     try {
         const website = await Website.findOne({
-            _id:req.params.id,
-            user:req.user._id
-        })
+        slug: req.params.slug,
+        deployed: true
+        });
 
         if(!website){
             return res.status(400).json({message:"website not found"})
@@ -395,19 +395,42 @@ export const deploy = async (req, res) => {
   }
 };
 
-export const getBySlug = async(req,res)=>{
+// export const getBySlug = async(req,res)=>{
+//   try {
+//     const website = await Website.findOne({
+//     slug: req.params.slug,
+//     user: req.user._id
+//   }) 
+//   if(!website){
+//     return res.status(400).json({message:"website not found"})
+//   }
+//   return res.status(200).json(website)
+
+//   } catch (error) {
+//     return res.status(500).json({message: `get by slug website error ${error}`})
+//   }
+
+// }
+
+export const getBySlug = async (req, res) => {
   try {
+
     const website = await Website.findOne({
-    slug: req.params.slug,
-    user: req.user._id
-  }) 
-  if(!website){
-    return res.status(400).json({message:"website not found"})
-  }
-  return res.status(200).json(website)
+      slug: req.params.slug,
+      deployed: true
+    });
+
+    if (!website) {
+      return res.status(404).json({
+        message: "website not found"
+      });
+    }
+
+    return res.status(200).json(website);
 
   } catch (error) {
-    return res.status(500).json({message: `get by slug website error ${error}`})
+    return res.status(500).json({
+      message: `get by slug website error ${error}`
+    });
   }
-
-}
+};
